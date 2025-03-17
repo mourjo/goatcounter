@@ -293,7 +293,7 @@ create table locations (
 	region_name    varchar        not null
 );
 create unique index "locations#iso_3166_2" on locations(iso_3166_2);
-insert into locations (country, country_name, region, region_name) values ('', '(unknown)', '', ''); -- id=1 is special.
+insert into locations (country, country_name, region, region_name, iso_3166_2) values ('', '(unknown)', '', '', ''); -- id=1 is special.
 
 create table languages (
 	iso_639_3      varchar        not null,
