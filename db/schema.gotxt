@@ -139,7 +139,7 @@ create table sizes (
 	size           varchar          not null
 );
 create index "sizes#size" on sizes(size);
-insert into sizes (width, height, scale) values (0, 0, 0);
+insert into sizes (width, height, scale, size) values (0, 0, 0, '0,0,0');
 
 create table hit_counts (
 	site_id        integer        not null,
