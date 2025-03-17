@@ -56,8 +56,8 @@ func (s *Size) GetOrInsert(ctx context.Context, size Floats) error {
 	}
 
 	s.ID, err = zdb.InsertID(ctx, "size_id",
-		`insert into sizes (width, height, scale) values (?, ?, ?)`,
-		s.Width, s.Height, s.Scale)
+		`insert into sizes (width, height, scale, size) values (?, ?, ?, ?)`,
+		s.Width, s.Height, s.Scale, s.Width::text + "," + s.Height + "," + fmt.Sprintf("%.2f", s.Scale))
 	if err != nil {
 		return errors.Wrap(err, "Size.GetOrInsert insert")
 	}

@@ -136,10 +136,7 @@ create table sizes (
 	height         integer          not null,
 	scale          double precision not null,
 
-	size           varchar          generated always as (
-		{{psql   `width::text || ',' || height::text || ',' || scale::text`}}
-		{{sqlite `width || ',' || height || ',' || scale`}}
-	) stored
+	size           varchar          not null
 );
 create index "sizes#size" on sizes(size);
 insert into sizes (width, height, scale) values (0, 0, 0);
@@ -289,7 +286,7 @@ create index "exports#site_id#created_at" on exports(site_id, created_at);
 create table locations (
 	location_id    {{auto_increment}},
 
-	iso_3166_2     varchar        generated always as (country || (case region when '' then '' else ('-' || region) end)) stored,
+	iso_3166_2     varchar        not null,
 	country        varchar        not null,
 	region         varchar        not null,
 	country_name   varchar        not null,

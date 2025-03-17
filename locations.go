@@ -137,9 +137,15 @@ func (l Location) LookupIP(ctx context.Context, ip string) string {
 }
 
 func (l *Location) insert(ctx context.Context) (err error) {
+    iso_3166_2 := l.Country
+
+    if l.Region != "" {
+        iso_3166_2 = iso_3166_2 + "-" + l.Region
+    }
+
 	l.ID, err = zdb.InsertID(ctx, "location_id",
-		`insert into locations (country, region, country_name, region_name) values (?, ?, ?, ?)`,
-		l.Country, l.Region, l.CountryName, l.RegionName)
+		`insert into locations (country, region, country_name, region_name, iso_3166_2) values (?, ?, ?, ?, ?)`,
+		l.Country, l.Region, l.CountryName, l.RegionName, iso_3166_2)
 	if err != nil {
 		return err
 	}
